@@ -1,0 +1,6 @@
+[redmine-aws]
+redmine-trunk   ansible_host=your_host_ip
+
+[all:vars]
+ansible_ssh_user=ec2-user
+ansible_ssh_private_key_file=./keys/your_key_file

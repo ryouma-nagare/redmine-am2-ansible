@@ -1,0 +1,17 @@
+#
+# Redmine on Amazon Linux 2
+#
+- hosts: redmine-trunk
+  become: yes
+  become_user: root
+  roles:
+  - role: common
+    tags: common
+  - role: ruby
+    tags: ruby
+  - role: postgres
+    tags: postgres
+  - role: apache
+    tags: apache
+  - role: redmine
+    tags: redmine

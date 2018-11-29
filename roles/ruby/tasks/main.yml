@@ -1,0 +1,18 @@
+##############################################################
+# Ruby
+##############################################################
+
+- name: enable amazon-linux-extras
+  shell: "amazon-linux-extras enable ruby{{ ruby.version }}"
+
+- name: install ruby
+  yum:
+    name:
+    - "ruby"
+    - "ruby-devel"
+    - "rubygems"
+    - "rubygem-rdoc"
+    - "rubygem-bundler"
+    - "rubygem-bigdecimal"
+    - "rubygem-json"
+    - "@Development Tools"

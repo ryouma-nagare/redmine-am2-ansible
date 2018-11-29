@@ -1,0 +1,52 @@
+##############################################################
+# AmazonLinux initial setup
+##############################################################
+
+- name: delete locale from /etc/cloud/cloud.cfg
+  replace:
+    dest: /etc/cloud/cloud.cfg
+    regexp: '^locale\:.*$'
+
+- name: set locale to /etc/cloud/cloud.cfg
+  lineinfile:
+    dest: /etc/cloud/cloud.cfg
+    line: "locale: {{ common.locale }}"
+
+- name: set repo_upgrade to /etc/cloud/cloud.cfg
+  lineinfile:
+    dest: /etc/cloud/cloud.cfg
+    regexp: 'repo_upgrade\:'
+    line: "repo_upgrade: {{ common.repo_upgrade }}"
+
+- name: set localtime
+  file:
+    src: "{{ common.zoneinfo_path }}"
+    dest: /etc/localtime
+    state: link
+    force: yes
+
+- name: fix hostname
+  replace:
+    dest: /etc/cloud/cloud.cfg
+    regexp: '^ - set-hostname'
+    replace: '# - set-hostname'
+
+- name: fix hostname
+  replace:
+    dest: /etc/cloud/cloud.cfg
+    regexp: '^ - update-hostname'
+    replace: '# - update-hostname'
+
+- name: fix hostname
+  replace:
+    dest: /etc/cloud/cloud.cfg
+    regexp: '^ - update-etc-hosts'
+    replace: '# - update-etc-hosts'
+
+- name: set hostname
+  hostname: name={{ inventory_hostname }}
+
+- name: yum update
+  yum:
+    state: latest
+    name: "*"
