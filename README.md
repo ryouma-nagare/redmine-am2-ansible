@@ -19,7 +19,7 @@ yum/gemだけでインストールできるように選んでいます。
 ## 環境依存の設定
 
 #### MW設定
-- `group_vars/redmine-servers`
+- `group_vars/redmine-aws`
     - データベース設定
         - `postgres.db_name` にデータベース名
         - `postgres.db_user` にデータベース接続のユーザ名
