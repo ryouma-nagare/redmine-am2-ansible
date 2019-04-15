@@ -1,23 +1,15 @@
 ##############################################################
 # PostgreSQL 11
 ##############################################################
-- name: install repo
-  yum:
-    name="{{ postgres.repo_url }}"
-
-- name: change .repo file
-  replace:
-    path='{{ postgres.repo_path }}'
-    regexp='\$releasever'
-    replace='7'
-
 - name: install postgresql
   yum:
     name:
-    - "postgresql11"
-    - "postgresql11-server"
-    - "postgresql11-devel"
     - "python-psycopg2"
+    - "libicu-devel"
+    - "{{ postgres.postgresql_libs_rpm }}"
+    - "{{ postgres.postgresql_rpm }}"
+    - "{{ postgres.postgresql_server_rpm }}"
+    - "{{ postgres.postgresql_devel_rpm }}"
 
 - name: initdb
   command:
